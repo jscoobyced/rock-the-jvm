@@ -1,5 +1,7 @@
 package lectures.part1basics
 
+import lectures.part1basics.Recursions.number
+
 import scala.annotation.tailrec
 
 object Recursions extends App {
@@ -31,15 +33,30 @@ object Recursions extends App {
 
   println(concat("hello_", 5, ""))
 
-  def isPrime(n: Int): Boolean = {
-    def isPrimeUntil(t: Int, r: Boolean): Boolean =
-      if (!r) false
-      else if (t <= 1) true
-      else isPrimeUntil(t - 1, n % t != 0 && r)
+  var divider = 0
 
-    isPrimeUntil(n / 2, true)
+  def isPrime(n: Int): Boolean = {
+    def isPrimeUntil(number: Int, accumulator: Boolean): Boolean = {
+      val ratio = n % number
+      if (!accumulator) {
+        divider = number + 1
+        false
+      }
+      else if (number <= 1) true
+      else isPrimeUntil(number - 1, ratio != 0 && accumulator)
+    }
+
+    if(n % 2 == 0) {
+      divider = 2
+      false
+    }
+    else isPrimeUntil(n / 2, true)
   }
 
-  println(isPrime(353))
+  val number = 1003
+  val isPrime: Boolean = isPrime(number)
+  val isPrimeString: String = if (!isPrime) "not " else ""
+  val isDivisible = if (!isPrime) s" It is divisible by ${divider}." else ""
+  println(s"${number} is ${isPrimeString}a prime number.${isDivisible}")
 
 }
