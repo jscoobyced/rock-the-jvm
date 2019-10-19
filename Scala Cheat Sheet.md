@@ -1,3 +1,8 @@
+<style>
+.code {
+  color:#127622;
+}
+</style>
 # Scala Cheat Sheet
 
 Miscellaneous
@@ -84,7 +89,7 @@ When an expression is passed to a function definition by name:\* The expression 
 
 The notation for calling by name is <span style="color:#a3238e;">variable\_name: =&gt; variable\_type</span>. Example:
 
-<div style="color:#127622;">
+<div class="code">
 def calledByName(x: =&gt; Long)
 </div>
 
