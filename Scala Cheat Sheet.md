@@ -1,7 +1,5 @@
-<div style="text-align:center;">
-**Scala Cheat Sheet**
+# Scala Cheat Sheet
 
-</div>
 Miscellaneous
 =============
 
@@ -85,8 +83,9 @@ When an expression is passed to a function definition by name:\* The expression 
 -   It is evaluated at every use within the function
 
 The notation for calling by name is <span style="color:#a3238e;">variable\_name: =&gt; variable\_type</span>. Example:
+
 <div style="color:#127622;">
-def calledByName(**x: =&gt; Long**)
+def calledByName(x: =&gt; Long)
 </div>
 
 It can be useful for <span style="color:#faa61a;">lazy stream</span> and error management.
