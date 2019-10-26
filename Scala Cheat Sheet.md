@@ -82,10 +82,51 @@ When an expression is passed to a function definition by name:
 * The expression is passed literally
 * It is evaluated at every use within the function
 
-The notation for calling by name is *variable\_name: =&gt; variable\_type*. Example:
+The notation for calling by name is *variable_name: => variable_type*. Example:
 
 ```
 def calledByName(x: => Long)
 ```
 
 It can be useful for **lazy stream** and error management.
+
+Default and Named Arguments
+===========================
+
+**Default argument** is set with `= xxx` after the type declaration.  
+You must pass every leading arguments.
+Only tail arguments (or all of them) can have a default value.  
+You can pass a specific argument value by naming the argument: `myFunction(param = 800)`  
+You can use named parameter in any order.
+
+String Operations
+=================
+
+**S-interpolators**: using `$` variables in a `s"string with $parameters"` form.  
+**F-interpolators**: similar to the **S-interpolator** but with `printf` supported format (using `$param%format`):
+```
+val speed = 1.2f
+println(f"The speed is $speed%2.2f.")
+```
+Type is checked and doesn't allow wrong type format.  
+
+**raw-interpolators**: similar to the **S-interpolator** but can print the raw value:
+```
+println(raw"This \n is not a new line.")
+```
+Text from a **value** will not render raw text.
+
+Object Oriented
+===============
+
+**Class parameters** are not fields. Add the `val` keyword to make a **class parameter** a class field:
+```
+class Person(name: String, val age: Int)
+```
+
+Class implementation is delimited by curly brackets.  
+Class can have multiple constructors, using the `this` function name:
+```
+def this(name: String) = this(name, 0)
+```
+It is possible to use **default argument** with primary constructor.
