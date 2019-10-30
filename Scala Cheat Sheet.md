@@ -119,6 +119,7 @@ Text from a **value** will not render raw text.
 Object Oriented
 ===============
 
+Create a class definition: `class MyClass() { ... }`
 **Class parameters** are not fields. Add the `val` keyword to make a **class parameter** a class field:
 ```
 class Person(name: String, val age: Int)
@@ -130,3 +131,36 @@ Class can have multiple constructors, using the `this` function name:
 def this(name: String) = this(name, 0)
 ```
 It is possible to use **default argument** with primary constructor.
+
+Method Notations
+================
+
+**Methods** that have a single parameter can be called using **infix notation** or **operator notation**. Example:
+`movieList.contains("Titanic")`  
+can be written  
+`movieList  contains "Titanic"`
+
+The name **operator notation** refers to the way we use mathematical operators `+, -, *, /`. In scala, `1.+(2)` and `1 + 2` are equivalent.
+
+**Unary** operator supported: `-, +, ~ and !`:
+```
+class MyClass {
+  def unary_! : String = s"Whatever"
+}
+
+var myClass = new MyClass
+println(!myClass) // will print "Whatever"
+```
+This is also known as **prefix notation**
+
+There is **postfix notation** that can be used with method not having argument and using a space instead of a `.`. But it is rarely used as it can be confusing for other devs to read the code.
+
+Creating an `apply()` (without parameter) allows using the name of the value/variable with parenthesis `()` and it will call this `apply()` method.
+```
+class MyClass {
+  def apply(): String = s"Whatever"
+}
+
+var myClass = new MyClass
+println(myClass()) // will print "Whatever"
+```
