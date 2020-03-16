@@ -3,8 +3,6 @@
 Miscellaneous
 =============
 
-To create an **object** that can be run: *extends App*
-
 By defaults is ***everything should be immutable*** (better for // execution and multi-threading)
 
 Trailing semi-colon is optional, unless required (i.e. more than 1 **statement** in a line)
@@ -164,3 +162,61 @@ class MyClass {
 var myClass = new MyClass
 println(myClass()) // will print "Whatever"
 ```
+
+Objects
+=======
+
+*Scala does not have class level functionality* i.e. `static` doesn't exist.
+
+``object`` is a singleton instance
+
+``class`` and ``object`` in the same scope with same name are **companions**
+
+An **application** is an ``object`` with a 
+```
+def main(args: Array[String]): Unit
+```
+
+Scala is single ``class`` inheritance
+
+``private`` modifier makes the element available in the class itself only
+
+``protected`` modifier makes the element available in the class itself and subclass(es)
+
+Subclass calls the super **constructor** before it's own
+
+Use the ``override`` keyword before a `val`/`var`/`def` to override them (as long as they are not `private`)
+
+Overriding in the constructor:
+```
+class Parent {
+  val something: Type = "stuff"
+}
+
+class Child(override val something: Type) extends Parent
+val child = new Child(something)
+```
+
+**Type substitution** or **polymorphism** allows a child class that extends a parent to be assigned to a typed value of the parent class
+
+**overloading** can be used to create several `def` having the same name but different number of arguments
+
+The **super** keyword allows to access the parent version of a overriden `var`/`val`/`def`
+
+You can add the `final` modifier to prevent overriding, including on the a member or `class`
+
+A softer version of `final` is `sealed`, which allows to `extends` within the same file
+
+`abstract` class cannot be implemented, must be extended
+
+`override` keyword is not mandatory in subclass of `abstract` class
+
+A `trait` describes a behaviour, it can contain implemented members.
+Traits can't have constructor parameter.
+A class can inherit multiple `trait`s
+
+`Any` is the top-most class hierarchy  
+`AnyRef` is the parent of all objects (i.e. equivalent to java.lang.Object)  
+`AnyVal` is the parent of all primitives  
+`Null` extends all `AnyRef`  
+`Nothing` extends `AnyVal` and `Null`

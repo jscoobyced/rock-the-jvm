@@ -1,5 +1,7 @@
 package exercises.part2oop
 
+import scala.language.postfixOps;
+
 object PersonExercise extends App {
   class Person(val name: String, favoriteMovie: String, age: Int = 0) {
     def apply(): String = s"$name is $age years old and likes $favoriteMovie"
