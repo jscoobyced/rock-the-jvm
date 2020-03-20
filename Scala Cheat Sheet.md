@@ -220,3 +220,44 @@ A class can inherit multiple `trait`s
 `AnyVal` is the parent of all primitives  
 `Null` extends all `AnyRef`  
 `Nothing` extends `AnyVal` and `Null`
+
+
+Generics
+========
+
+Define the **generic** type using square brackets `[A]` or `[A, B]`
+
+`Trait`s and methods can also be **generic**
+
+`Covariance` in scala is noted with a `[+A]` **generic** type. This allows to assign a subclass type to a parent class type. Example:
+```
+class Creature
+class Animal extends Creature
+class Cat extends Animal
+class Dog extends Animal
+class CovariantList[+A]
+val catList: CovariantList[Animal] = new CovariantList[Cat]
+catList.add(new Cat())
+```
+
+`Invariance` is simple `[A]` **generic** type. This does not allow to substitue a subclass
+
+`Contravariance` is noted by `[-A]` allows to assign a parent class like:
+```
+class Trainer[-A]
+var trainer: Trainer[Cat] = new Trainer[Animal]
+```
+
+`Bounded types` allows the super-class or sub-class to be substitued
+Example for sub-class: only sub-class of `Animal` is allowed.
+```
+class Cage[A <: Animal](animal: A)
+val cage = new Cage(new Dog)
+```
+
+Example for super-class: only a parent class of `Animal` is allowed.
+```
+class Cage[A >: Animal](creature: A)
+val cage = new Cage(new Creature)
+```
+
