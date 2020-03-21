@@ -261,3 +261,46 @@ class Cage[A >: Animal](creature: A)
 val cage = new Cage(new Creature)
 ```
 
+Anonymous classes
+=================
+
+A **annonymous class** is a compilation time created class of a inline implemented abstract class, class or trait.
+
+It is possible to re-implement/override a method inline, as long as all constructor arguments are provided. Example:
+```
+class Person(name: String) {
+  def sayHi: Unit = println(s"Hi, my name is $name.")
+}
+
+val jim = new Person("Jim") {
+  override def sayHi: Unit = println(s"Hi, my name is Jim. How are you?")
+}
+```
+
+You must implement all abstract fields/methods in the anonymous class.
+
+Case classes
+============
+
+**Case** class has class parameters as fields
+
+Syntax is
+```
+case class Person(name: String, age: Int)
+```
+
+`toString` overrie is more friendly than the default implementation.
+
+`equals` and `hashCode` are implemented
+
+`copy` method allows to copy the case class, optionnaly overriding fields values
+```
+val john = new Person("john", 45)
+val jim = john.copy(age = 25)
+```
+
+There is companion objects available. I.e. the `apply` methods allows to do `val jack = Person("jack", 30)`. The `new` keyword is not necessary.
+
+**Case** classes are serializable out of the box. They also have exctractor patterns, so they can be used in pattern matching.
+
+**Case** objects are similar to **case** classes except there is no companion object (they are the companion object themselves)
