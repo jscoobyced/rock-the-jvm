@@ -24,7 +24,7 @@ abstract class MyList[+A] {
   override def toString(): String = "[" + printElements + "]"
 }
 
-object Empty extends MyList[Nothing] {
+case object Empty extends MyList[Nothing] {
   def head: Nothing = throw new NoSuchElementException
 
   def tail: MyList[Nothing] = throw new NoSuchElementException
@@ -46,7 +46,7 @@ object Empty extends MyList[Nothing] {
 }
 
 
-class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
+case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
   def head: A = h
 
   def tail: MyList[A] = t
@@ -77,11 +77,13 @@ class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
 
 object ListTestGeneric extends App {
   val listOfInteger = new Cons[Int](1, new Cons(2, new Cons(3, Empty)))
+  val clonedListOfInteger = new Cons[Int](1, new Cons(2, new Cons(3, Empty)))
   println(listOfInteger.tail.head)
   println(listOfInteger.add(4).head)
   println(listOfInteger.toString)
   val listOfString = new Cons[String]("I", new Cons("can", new Cons("do", new Cons("scala.", Empty))))
   println(listOfString.toString())
+  println(listOfInteger == clonedListOfInteger)
 }
 
 trait MyPredicate[-T] {
