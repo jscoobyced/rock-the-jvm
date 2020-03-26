@@ -1,4 +1,4 @@
-# Basics and Fundamentals
+# Scala Cheat Sheet - Basics and Fundamentals
 
 Miscellaneous
 =============

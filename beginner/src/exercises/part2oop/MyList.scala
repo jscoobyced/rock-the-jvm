@@ -12,11 +12,11 @@ abstract class MyList[+A] {
 
   def printElements: String
 
-  def map[B](transformer: MyTransformer[A, B]): MyList[B]
+  def map[B](transformer: A => B): MyList[B]
 
-  def flatMap[B](transformer: MyTransformer[A, MyList[B]]): MyList[B]
+  def flatMap[B](transformer: A => MyList[B]): MyList[B]
 
-  def filter(predicate: MyPredicate[A]): MyList[A]
+  def filter(predicate: A => Boolean): MyList[A]
 
   def ++[B >: A](list: MyList[B]): MyList[B]
 
@@ -33,11 +33,11 @@ case object Empty extends MyList[Nothing] {
 
   def add[B >: Nothing](value: B): MyList[B] = new Cons(value, Empty)
 
-  def map[B](transformer: MyTransformer[Nothing, B]): MyList[B] = Empty
+  def map[B](transformer: Nothing => B): MyList[B] = Empty
 
-  def flatMap[B](transformer: MyTransformer[Nothing, MyList[B]]): MyList[B] = Empty
+  def flatMap[B](transformer: Nothing => MyList[B]): MyList[B] = Empty
 
-  def filter(predicate: MyPredicate[Nothing]): MyList[Nothing] = Empty
+  def filter(predicate: Nothing => Boolean): MyList[Nothing] = Empty
 
   def ++[B >: Nothing](list: MyList[B]): MyList[B] = list
 
@@ -55,19 +55,19 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
 
   def add[B >: A](value: B): MyList[B] = new Cons(value, this)
 
-  def map[B](transformer: MyTransformer[A, B]): MyList[B] = {
-    new Cons(transformer.transform(h), t.map(transformer))
+  def map[B](transformer: A => B): MyList[B] = {
+    new Cons(transformer(h), t.map(transformer))
   }
 
-  def filter(predicate: MyPredicate[A]): MyList[A] = {
-    if (predicate.test(h)) new Cons(h, t.filter(predicate))
+  def filter(predicate: A => Boolean): MyList[A] = {
+    if (predicate(h)) new Cons(h, t.filter(predicate))
     else t.filter((predicate))
   }
 
   def ++[B >: A](list: MyList[B]): MyList[B] = new Cons(h, tail ++ list)
 
-  def flatMap[B](transformer: MyTransformer[A, MyList[B]]): MyList[B] = {
-    transformer.transform(h) ++ t.flatMap(transformer)
+  def flatMap[B](transformer: A => MyList[B]): MyList[B] = {
+    transformer(h) ++ t.flatMap(transformer)
   }
 
   def printElements: String =
@@ -86,32 +86,12 @@ object ListTestGeneric extends App {
   println(listOfInteger == clonedListOfInteger)
 }
 
-trait MyPredicate[-T] {
-  def test(value: T): Boolean
-}
-
-trait MyTransformer[-A, B] {
-  def transform(value: A): B
-}
-
-class EvenPredicate extends MyPredicate[Int] {
-  override def test(value: Int): Boolean = (value % 2) == 0
-}
-
-class StringToIntegerTransformer extends MyTransformer[String, Int] {
-  override def transform(value: String): Int = value.toInt
-}
-
-class PlusOneTransformer extends MyTransformer[Int, MyList[Int]] {
-  override def transform(value: Int): MyList[Int] = new Cons(value, new Cons(value + 1, Empty))
-}
-
 object NewListTest extends App {
-  val listOfString = new Cons[String]("01", new Cons("002", new Cons("3", new Cons("04", Empty))))
+  val listOfString = new Cons[String]("01", Cons("002", Cons("3", Cons("04", Empty))))
   println(listOfString.toString())
-  val mappedToInt = listOfString.map(new StringToIntegerTransformer())
+  val mappedToInt = listOfString.map((_.toInt))
   println(mappedToInt.toString())
-  println(mappedToInt.filter(new EvenPredicate()))
-  println(mappedToInt.flatMap(new PlusOneTransformer()))
+  println(mappedToInt.filter((_ % 2 == 0)))
+  println(mappedToInt.flatMap((value => Cons(value, Cons(value + 1, Empty)))))
 
 }
