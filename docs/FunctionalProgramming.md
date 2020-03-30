@@ -72,3 +72,11 @@ val added: Int => Int = (a, b) = a + b
 // or
 val added: Int => Int = _ + _
 ```
+
+Higher-Order Functions
+======================
+
+A **higher order function** (HOF)  is a function that takes a function as parameter or returns a function as a result.
+
+A function with a list of parameter is a **curried function**. The type for the smaller functions must have type defined.
+
