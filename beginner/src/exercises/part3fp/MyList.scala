@@ -128,4 +128,9 @@ object TestList extends App {
 
   println(listOne.fold(0)(_ + _))
 
+  val combination = for {
+    n <- listOne
+    i <- listTwo
+  } yield n + i
+  println(combination)
 }

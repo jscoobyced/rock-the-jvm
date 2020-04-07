@@ -102,4 +102,52 @@ There is a built-in `List` that provides all the `map`, `filter`, `sort`... func
 
 ```
 
-It is possible to **guard** any of the list
+It is possible to **guard** any of the list by adding an `if` statement on the same line. It is translated to a `filter` function:
+```
+  val forCombination = for {
+    n <- numbers if n % 2 == 0
+    c <- characters
+    co <- colors
+  } yield s"$c$n-$co"
+
+```
+A **for-loop** can be written:
+```
+for {
+    n <- numbers
+} println(n)
+```
+A **map** syntax-overload is:
+```
+list.map { x =>
+    x * 2
+}
+```
+
+Immutable Collections
+=====================
+
+`Traversable` is the base `trait` of all **collections**.
+
+`Iterable` extends `Traversable`
+
+`Seq` extends `Iterable`
+
+`Set`s cannot include duplicates
+
+The `List` two sub-types are `Nil` **object** and `::` **class**. Using a value followed by `::` then a `List` is equivalent to calling the `apply` method on a `List`:
+```
+val prepended = 42 :: aList
+val prependedToo = ::.apply(42, aList)
+```
+Difference between `5 :: List(1,2,3)` and `5 +: List(1,2,3)` ?
+```
+val anotherPrepended = 42 +: aList :+ 56
+val anotherPrependedToo = aList.prepended(42).appended(56)
+```
+
+`List` have constant execution time for `head`, `tail` and `isEmpty`  
+`List` have linear execution time for `length`, `reverse`...  
+
+`Vector` have effectively constant execution time  read and write: O(log32(n))
+
