@@ -28,7 +28,7 @@ Types can be **inferred**
 
 *var* is used for **side-effects**
 
-**side-effects** are expressions returning a *Unit*
+**side-effects** are expressions returning a *Unit*. An empty *Unit* is represented by `()`
 
 **Expression** is a value, it is evaluated. In Scala everything is an **expression**
 

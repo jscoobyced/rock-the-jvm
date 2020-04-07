@@ -80,3 +80,26 @@ A **higher order function** (HOF)  is a function that takes a function as parame
 
 A function with a list of parameter is a **curried function**. The type for the smaller functions must have type defined.
 
+Map and al
+==========
+
+There is a built-in `List` that provides all the `map`, `filter`, `sort`... functionalities
+
+**for-comprehension** is a notation that makes it more readable when a series of `map` and `flatMap` are cascaded:
+```
+  val numbers = List(1, 2, 3, 4)
+  val characters = List('a', 'b', 'c', 'd')
+  val colors = List("white", "black")
+
+  val hardToRead = numbers.flatMap(n => characters.flatMap(c => colors.map(co => s"$c$n-$co"))))
+
+  // is equivalent to the for-comprehension
+  val forCombination = for {
+    n <- numbers
+    c <- characters
+    co <- colors
+  } yield s"$c$n-$co"
+
+```
+
+It is possible to **guard** any of the list
