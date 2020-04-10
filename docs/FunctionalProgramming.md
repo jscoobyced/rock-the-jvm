@@ -151,3 +151,27 @@ val anotherPrependedToo = aList.prepended(42).appended(56)
 
 `Vector` have effectively constant execution time  read and write: O(log32(n))
 
+`Tuple`s are finite ordered kind-of `List`. It can be initialized with full notation or short notation:
+```
+val aTuple = new Tuple2(2, "Hello, Scala!")
+// or
+val anotherTuple = Tuple2(2, "Hello, Scala!")
+// or even 
+val yetAnotherTuple = (2, "Hello, Scala!")
+```
+
+There can be up to 22 elements in a `Tuple`
+
+`Map`s are used to associate **key**s to **value**s.
+
+We can use the syntactic sugar `a -> b` to link a **key** to a **value**.
+
+Accessing an element of a `Map` with a non-existant `key` will result in a `NoSuchElementException`. It is possible to provide a default value:
+```
+val aMap = Map("John" -> 123, "jim" -> 456).withDefaultValue(-1)
+```
+`Map` being immutable, to add a `tuple`:
+```
+val newMap = oldMap + (key,  value)
+```
+Using `groupBy` on a `List` creates a `map`.
