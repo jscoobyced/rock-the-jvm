@@ -201,11 +201,20 @@ Exceptions
 
 **Exception**s are JVM concept, not Scala specific.
 
-**Exception**s are thrown when something is wrong with the program
+**Exception**s are thrown when something is wrong with the program.
 
-**Error**s are thrown when something is wrong with the system
+**Error**s are thrown when something is wrong with the system.
 
 `finally` doesn't influence the return type of the block. It should be used only for side-effects (i.e. logging)
+
+```
+try {
+  // do something that could throw Exceptions
+} catch {
+  case _: IOException => // Do something
+  case _: Exception => // Do something else
+}
+```
 
 Packages
 ========
