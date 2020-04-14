@@ -55,4 +55,29 @@ val result = someInstance match {
 
 The return type of a `match` is the unified type of all types in all `cases`. If there is no unification, the type is `Any`.
 
-`Case` classes can be used for pattern matching.
+**Case classes** can be used for pattern matching. **Pattern matching** can be nested with **case classes**:
+```
+val aList: MyList[Int] = Cons(1, Cons(2, Empty))
+val matchList = aList match {
+  case Empty =>
+  case Cons(head1, Cons(head2, tail2)) =>
+}
+```
+**Pattern matching** on `List` has many possibilities:
+```
+val aStandardList = List(1,2,3,42)
+val standardListMatching = aStandardList match {
+  case List(1, _, _, _) => // extractor
+  case List(1, _*) => // List of arbitrary length
+  case 1 :: List(_) => // infix pattern
+  case List(_) :+ 42 => // infix pattern
+}
+```
+
+Define the type to match by specifying it: `case list: List[Int] =>`.
+
+Name a pattern matched with `case noneEmptyList @ Cons(_, _) => noneEmptyList`.
+
+Match multiple patterns with `|` as in `case Empty | Cons(0, _) =>`.
+
+Match a pattern with condition with `case Cons(_, Cons(specialElement, _)) if specialElement > 3 =>`.
