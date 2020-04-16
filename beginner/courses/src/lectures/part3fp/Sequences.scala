@@ -26,9 +26,7 @@ object Sequences extends App {
   println(prependedToo)
 
   val anotherPrepended = 42 +: aList :+ 56
-  val anotherPrependedToo = aList.prepended(42).appended(56)
   println(anotherPrepended)
-  println(anotherPrependedToo)
 
   val apple5 = List.fill(5)("apple")
   println(apple5)

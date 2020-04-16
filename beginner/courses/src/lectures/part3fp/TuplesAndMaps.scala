@@ -23,9 +23,9 @@ object TuplesAndMaps extends App {
 
   println(phoneBook.map(pair => pair._1.toLowerCase -> pair._2))
 
-  println(phoneBook.view.filterKeys(x => x.startsWith("Jo")).toMap)
+  println(phoneBook.filterKeys(x => x.startsWith("Jo")).toMap)
 
-  println(phoneBook.view.mapValues(number => "+1 " + number).toMap)
+  println(phoneBook.mapValues(number => "+1 " + number).toMap)
 
   val names = List("John", "Jane", "Mike", "Mary", "Bob", "Alice")
   println(names.groupBy(name => name.charAt(0)))
