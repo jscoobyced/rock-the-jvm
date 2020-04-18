@@ -1,5 +1,7 @@
 package io.narok.scala.fs.files
 
+import io.narok.scala.fs.core.FileSystemException
+
 import scala.annotation.tailrec
 
 class Directory(override val parentPath: String, override val name: String, val content: List[DirEntry])
@@ -8,6 +10,8 @@ class Directory(override val parentPath: String, override val name: String, val 
   override def asDirectory: Directory = this
 
   override def getType: String = "Directory"
+
+  override def asFile: File = throw new FileSystemException("A Directory cannot be converted to a File.")
 
   override def getShortType: String = "d"
 
@@ -31,7 +35,7 @@ class Directory(override val parentPath: String, override val name: String, val 
       .findDescendant(path.tail)
   }
 
-  def getAllDirectoriesInPath(): List[String] =
+  def getAllDirectoriesInPath: List[String] =
     path.substring(Directory.SEPARATOR.length)
       .split(Directory.SEPARATOR)
       .toList

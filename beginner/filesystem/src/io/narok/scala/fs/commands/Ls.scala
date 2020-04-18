@@ -1,5 +1,8 @@
 package io.narok.scala.fs.commands
 
+import java.text.SimpleDateFormat
+import java.util.Date
+
 import io.narok.scala.fs.core.State
 import io.narok.scala.fs.files.DirEntry
 
@@ -9,7 +12,7 @@ class Ls extends Command {
     if (contents.isEmpty) ""
     else {
       val entry = contents.head
-      entry.getShortType + " " + entry.name + System.lineSeparator() + createNiceOutput(contents.tail)
+      entry.getShortType + " " + dateFormat(entry.getLastModifiedTime) + " "  + entry.name + System.lineSeparator() + createNiceOutput(contents.tail)
     }
   }
 
@@ -17,5 +20,10 @@ class Ls extends Command {
     val contents = state.workingDirectory.content
     val niceOutput = createNiceOutput(contents)
     state.setMessage(niceOutput.substring(0, niceOutput.length - Math.min(niceOutput.length, System.lineSeparator().length)))
+  }
+
+  private def dateFormat(date: Date): String = {
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+    dateFormat.format(date)
   }
 }
