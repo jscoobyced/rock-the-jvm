@@ -43,17 +43,17 @@ object TuplesAndMapsExercises extends App {
     def losersCount(): Int = network.count(_._2.isEmpty)
 
     def socialConnection(person1: String, person2: String): Boolean = {
-      def breadFirstSearch(target: String, consideredPeople: Set[String], discoveredPeople: Set[String]) : Boolean = {
+      def breadthFirstSearch(target: String, consideredPeople: Set[String], discoveredPeople: Set[String]) : Boolean = {
         if (discoveredPeople.isEmpty) false
         else {
           val person = discoveredPeople.head
           if (person == target) true
-          else if (consideredPeople.contains(person)) breadFirstSearch(target, consideredPeople, discoveredPeople.tail)
-          else breadFirstSearch(target, consideredPeople + person, discoveredPeople.tail ++ network(person))
+          else if (consideredPeople.contains(person)) breadthFirstSearch(target, consideredPeople, discoveredPeople.tail)
+          else breadthFirstSearch(target, consideredPeople + person, discoveredPeople.tail ++ network(person))
         }
       }
 
-      breadFirstSearch(person2, Set(), network(person1) + person1)
+      breadthFirstSearch(person2, Set(), network(person1) + person1)
     }
 
   }
