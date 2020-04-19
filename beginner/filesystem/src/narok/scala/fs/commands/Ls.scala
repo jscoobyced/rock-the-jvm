@@ -1,10 +1,10 @@
-package io.narok.scala.fs.commands
+package narok.scala.fs.commands
 
 import java.text.SimpleDateFormat
 import java.util.Date
 
-import io.narok.scala.fs.core.State
-import io.narok.scala.fs.files.DirEntry
+import narok.scala.fs.core.State
+import narok.scala.fs.files.DirEntry
 
 class Ls extends Command {
 

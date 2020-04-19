@@ -1,7 +1,8 @@
-package io.narok.scala.fs.commands
+package narok.scala.fs.commands
 
-import io.narok.scala.fs.core.State
-import io.narok.scala.fs.files.{DirEntry, Directory}
+import narok.scala.fs.core
+import narok.scala.fs.core.State
+import narok.scala.fs.files.{DirEntry, Directory}
 
 abstract class CreateEntry(entryName: String) extends Command {
 
@@ -38,7 +39,7 @@ abstract class CreateEntry(entryName: String) extends Command {
     val newEntry = createSpecificEntry(state)
     val newRoot = updateStructure(state.root, allDirectoriesInPath, newEntry)
     val newWorkingDirectory = newRoot.findDescendant(allDirectoriesInPath)
-    State(newRoot, newWorkingDirectory)
+    core.State(newRoot, newWorkingDirectory)
   }
 
   def createSpecificEntry(state: State): DirEntry

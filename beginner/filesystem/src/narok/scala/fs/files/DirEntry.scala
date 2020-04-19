@@ -1,10 +1,15 @@
-package io.narok.scala.fs.files
+package narok.scala.fs.files
 
 import java.util.Date
 
 abstract class DirEntry(val parentPath: String, val name: String, val getLastModifiedTime: Date = new Date()) {
 
-  def path: String = parentPath + Directory.SEPARATOR + name
+  def path: String = {
+    val separatorIfNecessary =
+      if(Directory.ROOT_PATH.equals(parentPath)) ""
+      else Directory.SEPARATOR
+    parentPath + separatorIfNecessary + name
+  }
 
   def asDirectory: Directory
 
@@ -15,4 +20,9 @@ abstract class DirEntry(val parentPath: String, val name: String, val getLastMod
   def getShortType: String
 
   def getCreationTime: Date = new Date()
+
+  def isDirectory: Boolean
+
+  def isFile: Boolean
+
 }
