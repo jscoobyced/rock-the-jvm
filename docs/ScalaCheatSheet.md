@@ -1,7 +1,11 @@
 The courses are broken down to:
 
-1. [Basics and Fundamentals](./Basics.md)
-2. [Object Oriented Programming](./ObjectOriented.md)
-3. [Functional Programming in Scala](./FunctionalProgramming.md)
-4. [Collections in Scala](./Collections.md)
-5. [Miscellaneous](./Miscellaneous.md)
+Beginner:
+1. [Basics and Fundamentals](./beginner/Basics.md)
+2. [Object Oriented Programming](./beginner/ObjectOriented.md)
+3. [Functional Programming in Scala](./beginner/FunctionalProgramming.md)
+4. [Collections in Scala](./beginner/Collections.md)
+5. [Miscellaneous](./beginner/Miscellaneous.md)
+
+Advanced:
+1. [Syntactic Sugars](./advanced/SyntacticSugar.md)
