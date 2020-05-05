@@ -9,3 +9,4 @@ Beginner:
 
 Advanced:
 1. [Syntactic Sugars](./advanced/SyntacticSugar.md)
+2. [Advanced Pattern Matching](./advanced/PatternMatching.md)
